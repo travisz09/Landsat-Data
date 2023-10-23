@@ -34,11 +34,11 @@ dir(wd) #Explore wd
 
 dir("Data") #Explore Data folder, should contain compressed data folder.
 
-#Untar data file - user input required.
+#Untar data file
 ##Check wd/Data for n files
 ##if Data folder contains exactly 1 file with .tar extension.
 if (length(list.files(path = "Data"))==1 &
-    is.character(list.files(path = "Data", pattern = ".tar"))==1) {
+    list.files(path = "Data", pattern = ".tar")==1) {
   #Get .tar filename.
   tarFile <- list.files(path = "Data",
                         pattern = ".tar")
@@ -51,7 +51,7 @@ if (length(list.files(path = "Data"))==1 &
 } #end if
 
 #After untaring wd/Data should contain ~20 files.
-dir(path = "Data") #Explore wd/Data
+dir("Data") #Explore wd/Data
 
 #Create list of extracted .tif files.
 #NOTE 1: For Landsat 8 and 9 bands 1-7 are the most frequently used.
@@ -108,12 +108,11 @@ dim(LSat) #Shows rows, columns, and bands
 ##  values of stretch = "hist" or NULL. In my opinion linear looks
 ##  best for most images, but your results may vary (see below).
 
-plot(LSat_Pan)
 ##Select desired LSat bands and assign them to RGB to visualize.
 ##For Landsat 8 and 9 natural color is shown as bands 4, 3, and 2
 ##  for red (r), green (g), and blue (b) respectively.
 plotRGB(LSat, r = 4, g = 3, b = 2, axes = FALSE, 
-        stretch = "lin") #use angle = 15 to correct plot skew. ANGLE NOT COMPATABLE WITH DRAW!
+        stretch = "lin") 
 
 #Interactive crop and zoom plotRGB - user input required.
 ##For draw() to work, your zoom settings on RStudio have to be set to
@@ -134,6 +133,15 @@ ext(LSat) #Explore data extent (coordinates).
 extnt <- c(400000, 500000, 5250000, 5350000)
 plotRGB(LSat, r = 4, g = 3, b = 2, axes = FALSE, 
         stretch = "lin", ext = extnt)
+
+#High resolution panchromatic image.
+#Default color pallet for terra::plot is "rev(grDevices::terrain.colors(50))"
+##  which corresponds to a red-green color pallet which is not
+##  great for this application. Colors can be modified but I cannot
+##  find an easy method for converting these panchromatic images
+##  to grayscale. If you have a good method for plotting rasters
+##  in black and white please let me know.
+plot(LSat_Pan, axes = F, legend = F, ext = extnt, mar = 0)
 
 #False Color Images.
 ##False color composite 1, with linear stretch.
@@ -199,6 +207,7 @@ plot(mndwi, main = "Modified Normalized Difference Water Index", axes = F)
 #plot(user_index, main = "My Index", axes = F) 
 
 #Saving an image----
+suppressWarnings(dir.create("Images")) #Create folder in wd.
 ##Use the appropriate function for the file type you desire following
 ##   the structure below.
 
