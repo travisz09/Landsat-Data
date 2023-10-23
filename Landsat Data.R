@@ -6,7 +6,7 @@
 ## Thank you to the University of Arizona and to Dr. Matthew Marcus
 ##  for teaching me how to access, process and visualize Landsat
 ##  data in R. Portions of this script have been borrowed from 
-##  lesson plans provided by Dr. Marcus.
+##  lesson plans provided by Dr. Marcus (with permision).
 
 #Objectives: 
 ### To learn how to import, visualize and explore Landsat satellite 
