@@ -12,6 +12,11 @@
 ### To learn how to import, visualize and explore Landsat satellite 
 ###     data using basic raster functions in R.
 
+#This tutorial is generic and can be applied to any Landsat 8 or 9 "Level 1" data.
+##   To recreate the figures at the end use Landsat 9 path 47, row 27, 9/16/2023.
+##   Data file can be searched using the methods specified in the README.md file.
+##   Data file = "LC09_L1TP_047027_20230916_20230916_02_T1.tar"
+
 #Setup ----
 #Packages
 ##Use install.packages("terra") if not previously installed on your machine.
@@ -167,7 +172,7 @@ hist(LSat_e[[2]], main = "Band 2 Histogram",
      xlab = "Value", ylab = "Frequency") 
 
 #Calculate Index Values----
-##NOTE 4: Indexes are values calculated by the difference between
+##NOTE 5: Indexes are values calculated by the difference between
 ##    two wavelengths divided by the sum of the same two wavelengths,
 ##    sometimes also containing a correction factor or other constant.
 ##    The resulting calculation is typically a normalized, unitless 
@@ -240,7 +245,9 @@ pdf("Images/NDVI.pdf")
 plot(ndvi, axes = F, main = "Normalized Difference Vegetation Index")
 dev.off()
 
-##To publish ----
+#To publish ----
+##Data file = "LC09_L1TP_047027_20230916_20230916_02_T1.tar"
+
 extnt <- c(380000, 555000, 5200000, 5350000)
 png(filename = "Images/Peninsula.png")
 plotRGB(LSat, r = 4, g = 3, b = 2, axes = F, 
