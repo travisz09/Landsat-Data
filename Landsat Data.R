@@ -43,7 +43,7 @@ dir("Data") #Explore Data folder, should contain compressed data folder.
 ##Check wd/Data for n files
 ##if Data folder contains exactly 1 file with .tar extension.
 if (length(list.files(path = "Data"))==1 &
-    list.files(path = "Data", pattern = ".tar")==1) {
+    length(list.files(path = "Data", pattern = ".tar"))==1) {
   #Get .tar filename.
   tarFile <- list.files(path = "Data",
                         pattern = ".tar")
